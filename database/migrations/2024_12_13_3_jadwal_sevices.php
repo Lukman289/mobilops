@@ -11,14 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('users_table', function (Blueprint $table) {
-            $table->id();
-            $table->string('name');
-            $table->string('email')->unique();
-            $table->timestamp('email_verified_at')->nullable();
-            $table->string('password');
-            $table->rememberToken();
+        Schema::create('jadwal_services', function (Blueprint $table) {
+            $table->id('jadwal_service_id');
+            $table->dateTime('tanggal_service');
+            $table->unsignedBigInteger('kendaraan_id');
             $table->timestamps();
+
+            $table->foreign('kendaraan_id')->references('kendaraan_id')->on('kendaraans')->onDelete('cascade');
         });
     }
 
@@ -27,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('users_table');
+        Schema::dropIfExists('jadwal_services');
     }
 };
