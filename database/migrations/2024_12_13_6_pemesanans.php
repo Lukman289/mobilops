@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('pemesanans', function (Blueprint $table) {
             $table->id('pemesanan_id');
-            $table->enum('status_pengajuan', ['menunggu', 'disetujui', 'ditolak'])->default('menunggu');
+            $table->enum('status_pengajuan', ['Menunggu', 'Disetujui', 'Ditolak'])->default('Menunggu');
             $table->dateTime('tanggal_pemesanan');
             $table->dateTime('tanggal_pemakaian');
             $table->unsignedBigInteger('kendaraan_id')->nullable();
