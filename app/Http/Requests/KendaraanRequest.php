@@ -6,19 +6,11 @@ use Illuminate\Foundation\Http\FormRequest;
 
 class KendaraanRequest extends FormRequest
 {
-    /**
-     * Determine if the user is authorized to make this request.
-     */
     public function authorize(): bool
     {
         return false;
     }
-
-    /**
-     * Get the validation rules that apply to the request.
-     *
-     * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
-     */
+    
     public function rules(): array
     {
         return [
@@ -34,14 +26,15 @@ class KendaraanRequest extends FormRequest
     {
         return [
             "nomor_polisi.required"=> "Nomor polisi harus diisi",
-            "jarak_tempuh.required"=> "Jarak tempuh harus diisi",
-            "jenis_kendaraan.required"=> "Jenis kendaraan harus diisi",
-            "konsumsi_bbm.required"=> "Konsumsi BBM harus diisi",
-            "status_kepemilikan.required"=> "Statu kepemilikan harus diisi",
+            "nomor_polisi.string"=> "Nomor polisi harus berupa text",
             "jarak_tempuh.numeric"=> "Jarak tempuh harus berupa angka",
+            "jarak_tempuh.required"=> "Jarak tempuh harus diisi",
             "jenis_kendaraan.enum"=> "Jenis kendaraan harus Angkutan Orang atau Angkutan Barang",
+            "jenis_kendaraan.required"=> "Jenis kendaraan harus diisi",
             "konsumsi_bbm.numeric"=> "Konsumsi BBM harus berupa angka",
+            "konsumsi_bbm.required"=> "Konsumsi BBM harus diisi",
             "status_kepemilikan.enum"=> "Status kepemilikan harus Milik Perusahaan atau Sewa",
+            "status_kepemilikan.required"=> "Statu kepemilikan harus diisi",
         ];
     }
 }
