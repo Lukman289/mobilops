@@ -16,3 +16,22 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/login', function () {
+    return view('auth.index');
+});
+
+Route::get('/admin', function () {
+    return view('admin.index');
+});
+
+Route::get('/validator', function () {
+    return view('validator.index');
+});
+
+// Route::get('/admin')->middleware('auth')->group(function () {
+//     Route::get('/', 'AdminController@index');
+//     Route::get('/dashboard', 'AdminController@dashboard');
+//     Route::get('/profile', 'AdminController@profile');
+//     Route::get('/settings', 'AdminController@settings');
+// });
