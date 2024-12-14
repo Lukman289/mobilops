@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('kendaraans', function (Blueprint $table) {
-            $table->id('kendaraan_id');
+            $table->id();
             $table->string('nomor_polisi')->unique();
             $table->double('jarak_tempuh');
             $table->enum('jenis_kendaraan',['Angkutan Orang','Angkutan Barang']);
@@ -21,7 +21,7 @@ return new class extends Migration
             $table->unsignedBigInteger('lokasi_kendaraan_id')->nullable();
             $table->timestamps();
 
-            $table->foreign('lokasi_kendaraan_id')->references('kantor_id')->on('kantors')->onDelete('set Null');
+            $table->foreign('lokasi_kendaraan_id')->references('id')->on('kantors')->onDelete('set Null');
         });
     }
 

@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('pegawais', function (Blueprint $table) {
-            $table->id('pegawai_id');
+            $table->id();
             $table->string('nama_pegawai');
             $table->string('no_hp');
             $table->string('email')->unique();
@@ -21,8 +21,8 @@ return new class extends Migration
             $table->unsignedBigInteger('pimpinan_id')->nullable();
             $table->timestamps();
 
-            $table->foreign('kantor_id')->references('kantor_id')->on('kantors')->onDelete('set Null');
-            $table->foreign('pimpinan_id')->references('pegawai_id')->on('pegawais')->onDelete('set Null');
+            $table->foreign('kantor_id')->references('id')->on('kantors')->onDelete('set Null');
+            $table->foreign('pimpinan_id')->references('id')->on('pegawais')->onDelete('set Null');
         });
     }
 

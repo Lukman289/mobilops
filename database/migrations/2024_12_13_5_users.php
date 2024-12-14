@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('users', function (Blueprint $table) {
-            $table->id('user_id');
+            $table->id();
             $table->string('username')->unique();
             $table->string('password');
             $table->enum('role', ['Admin', 'Pimpinan']);
@@ -20,7 +20,7 @@ return new class extends Migration
             $table->rememberToken()->nullable();
             $table->timestamps();
 
-            $table->foreign('pegawai_id')->references('pegawai_id')->on('pegawais')->onDelete('cascade');
+            $table->foreign('pegawai_id')->references('id')->on('pegawais')->onDelete('cascade');
         });
     }
 

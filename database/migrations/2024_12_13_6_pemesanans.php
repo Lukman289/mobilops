@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('pemesanans', function (Blueprint $table) {
-            $table->id('pemesanan_id');
+            $table->id();
             $table->enum('status_pengajuan', ['Menunggu', 'Disetujui', 'Ditolak'])->default('Menunggu');
             $table->dateTime('tanggal_pemesanan');
             $table->dateTime('tanggal_pemakaian');
@@ -22,10 +22,10 @@ return new class extends Migration
             $table->unsignedBigInteger('pengesah_id')->nullable();
             $table->timestamps();
 
-            $table->foreign('kendaraan_id')->references('kendaraan_id')->on('kendaraans')->onDelete('set Null');
-            $table->foreign('lokasi_peminjaman_id')->references('kantor_id')->on('kantors')->onDelete('set Null');
-            $table->foreign('driver_id')->references('pegawai_id')->on('pegawais')->onDelete('set Null');
-            $table->foreign('pengesah_id')->references('pegawai_id')->on('pegawais')->onDelete('set Null');
+            $table->foreign('kendaraan_id')->references('id')->on('kendaraans')->onDelete('set Null');
+            $table->foreign('lokasi_peminjaman_id')->references('id')->on('kantors')->onDelete('set Null');
+            $table->foreign('driver_id')->references('id')->on('pegawais')->onDelete('set Null');
+            $table->foreign('pengesah_id')->references('id')->on('pegawais')->onDelete('set Null');
         });
     }
 
