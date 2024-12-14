@@ -5,62 +5,40 @@ namespace App\Http\Controllers;
 use App\Models\JadwalService;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Http\Request;
+use App\Http\Requests\JadwalServiceRequest;
 
 class JadwalServiceController extends Controller
 {
     public function index()
     {
-        $jadwal_service = JadwalService::all();
+        $jadwalService = JadwalService::all();
 
-        Log::info(" Berhasil mengambil data jadwal service", ["total data" => count($jadwal_service)]);
+        Log::info(" Berhasil mengambil data jadwal service", ["total data" => count($jadwalService)]);
 
         return response()->json([
             "status"=> "success",
             "message"=> "Berhasil mengambil data jadwal service",
-            "data"=> $jadwal_service,
+            "data"=> $jadwalService,
         ]);
     }
 
     public function store(Request $request)
     {
-        $request->validate([
-            "tanggal_service"=> "required|date",
-            "jarak_tempuh"=> "required|numeric",
-        ], [
-            "nomor_polisi.required"=> "Nomor polisi harus diisi",
-            "jarak_tempuh.required"=> "Jarak tempuh harus diisi",
-            "jenis_jadwal_service.required"=> "Jenis jadwal_service harus diisi",
-            "konsumsi_bbm.required"=> "Konsumsi BBM harus diisi",
-            "status_kepemilikan.required"=> "Statu kepemilikan harus diisi",
-            "jarak_tempuh.numeric"=> "Jarak tempuh harus berupa angka",
-            "jenis_jadwal_service.enum"=> "Jenis jadwal_service harus Angkutan Orang atau Angkutan Barang",
-            "konsumsi_bbm.numeric"=> "Konsumsi BBM harus berupa angka",
-            "status_kepemilikan.enum"=> "Status kepemilikan harus Milik Perusahaan atau Sewa",
-        ]);
-
         try {
-            $jadwal_service = new JadwalService([
-                "nomor_polisi"=> $request->nomor_polisi,
-                "jarak_tempuh"=> $request->jarak_tempuh,
-                "jenis_jadwal_service"=> $request->jenis_jadwal_service,
-                "konsumsi_bbm"=> $request->konsumsi_bbm,
-                "status_kepemilikan"=> $request->status_kepemilikan,
-            ]);
+            $jadwalService = JadwalService::create($request->validated());
 
-            $jadwal_service->save();
-
-            Log::info("Berhasil menambahkan jadwal_service", ["nomor polisi jadwal_service"=> $jadwal_service->nomor_polisi]);
+            Log::info("Berhasil menambahkan jadwal service", ["nomor polisi jadwal service"=> $jadwalService->id]);
 
             return response()->json([
                 "status"=> "success",
-                "message"=> "Data jadwal_service berhasil ditambahkan",
-                "data"=> $jadwal_service
+                "message"=> "Data jadwal service berhasil ditambahkan",
+                "data"=> $jadwalService
             ], 201);
         } catch (\Exception $e) {
-            Log::error("Gagal menambahkan jadwal_service", ["error_message"=> $e->getMessage()]);
+            Log::error("Gagal menambahkan jadwalService", ["error_message"=> $e->getMessage()]);
             return response()->json([
                 "status"=> "failed",
-                "message"=> "Data jadwal_service gagal ditambahkan",
+                "message"=> "Data jadwal service gagal ditambahkan",
                 "error"=> $e->getMessage(),
             ], 400);
         }
@@ -68,76 +46,36 @@ class JadwalServiceController extends Controller
 
     public function show(string $id)
     {
-        $jadwal_service = JadwalService::find($id);
+        $jadwalService = JadwalService::findOrFail($id);
 
-        Log::info("Data jadwal_service ditemukan", ["nomor polisi jadwal_service"=> $jadwal_service->nomor_polisi]);
-
-        if (!$jadwal_service) {
-            Log::error("Gagal menemukan data jadwal_service", ["jadwal_service id"=> $id]);
-            return response()->json([
-                "status"=> "failed",
-                "message"=> "jadwal_service tidak ditemukan",
-            ], 404);
-        }
+        Log::info("Data jadwal service ditemukan", ["nomor polisi jadwal service"=> $jadwalService->id]);
 
         return response()->json([
             "status"=> "success",
-            "message"=> "Berhasil mengambil data jadwal_service",
-            "data"=> $jadwal_service,
+            "message"=> "Berhasil mengambil data jadwal service",
+            "data"=> $jadwalService,
         ],200);
     }
 
     public function update(Request $request, string $id)
     {
         try {
-            $jadwal_service = JadwalService::find($id);
+            $jadwalService = JadwalService::findOrFail($id);
 
-            if (!$jadwal_service) {
-                Log::error("Gagal menemukan data jadwal_service", ["jadwal_service id"=> $id]);
-                return response()->json([
-                    "status"=> "failed",
-                    "message"=> "jadwal_service tidak ditemukan",
-                ], 404);
-            }
+            $jadwalService->update($request->validated());
 
-            $request->validate([
-                "nomor_polisi"=> "required|string",
-                "jarak_tempuh"=> "required|numeric",
-                "jenis_jadwal_service"=> "required|string|in:Angkutan Orang,Angkutan Barang",
-                "konsumsi_bbm"=> "required|numeric",
-                "status_kepemilikan"=> "required|string|in:Milik Perusahaan,Sewa",
-            ], [
-                "nomor_polisi.required"=> "Nomor polisi harus diisi",
-                "jarak_tempuh.required"=> "Jarak tempuh harus diisi",
-                "jenis_jadwal_service.required"=> "Jenis jadwal_service harus diisi",
-                "konsumsi_bbm.required"=> "Konsumsi BBM harus diisi",
-                "status_kepemilikan.required"=> "Statu kepemilikan harus diisi",
-                "jarak_tempuh.numeric"=> "Jarak tempuh harus berupa angka",
-                "jenis_jadwal_service.enum"=> "Jenis jadwal_service harus Angkutan Orang atau Angkutan Barang",
-                "konsumsi_bbm.numeric"=> "Konsumsi BBM harus berupa angka",
-                "status_kepemilikan.enum"=> "Status kepemilikan harus Milik Perusahaan atau Sewa",
-            ]);
-
-            $jadwal_service->update([
-                "nomor_polisi"=> $jadwal_service->nomor_polisi,
-                "jarak_tempuh"=> $jadwal_service->jarak_tempuh,
-                "jenis_jadwal_service"=> $jadwal_service->jenis_jadwal_service,
-                "konsumsi_bbm"=> $jadwal_service->konsumsi_bbm,
-                "status_kepemilikan"=> $jadwal_service->status_kepemilikan,
-            ]);
-
-            Log::info("Berhasil mengupdate jadwal_service", ["nomor polisi jadwal_service"=> $jadwal_service->nomor_polisi]);
+            Log::info("Berhasil mengupdate jadwal service", ["nomor polisi jadwal service"=> $jadwalService->id]);
 
             return response()->json([
                 "status"=> "success",
-                "message"=> "jadwal_service berhasil diupdate",
-                "data"=> $jadwal_service,
+                "message"=> "jadwal service berhasil diupdate",
+                "data"=> $jadwalService,
             ], 200);
         } catch (\Exception $e) {
-            Log::error("Gagal mengupdate jadwal_service", ["error_message"=> $e->getMessage()]);
+            Log::error("Gagal mengupdate jadwal service", ["error_message"=> $e->getMessage()]);
             return response()->json([
                 "status"=> "failed",
-                "message"=> "jadwal_service gagal diupdate",
+                "message"=> "jadwal service gagal diupdate",
                 "error"=> $e->getMessage(),
             ], 400);
         }
@@ -145,23 +83,15 @@ class JadwalServiceController extends Controller
 
     public function destroy(string $id)
     {
-        $jadwal_service = JadwalService::find($id);
+        $jadwalService = JadwalService::findOrFail($id);
 
-        if (!$jadwal_service) {
-            Log::error("Gagal menemukan data jadwal_service", ["jadwal_service id"=> $id]);
-            return response()->json([
-                "status"=> "failed",
-                "message"=> "jadwal_service tidak ditemukan",
-            ],404);
-        }
+        $jadwalService->delete();
 
-        $jadwal_service->delete();
-
-        Log::info("Berhasil menghapus data jadwal_service", ["jadwal_service id"=> $id]);
+        Log::info("Berhasil menghapus data jadwal service", ["jadwal service id"=> $id]);
 
         return response()->json([
             "status"=> "success",
-            "message"=> "jadwal_service berhasil dihapus",
+            "message"=> "jadwal service berhasil dihapus",
         ], 200);
     }
 }

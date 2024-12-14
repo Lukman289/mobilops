@@ -27,7 +27,7 @@ class KendaraanController extends Controller
         try {
             $kendaraan = Kendaraan::create($request->validated());
 
-            Log::info("Berhasil menambahkan kendaraan", ["nomor polisi kendaraan"=> $kendaraan->nomor_polisi]);
+            Log::info("Berhasil menambahkan kendaraan", ["kendaraan id"=> $kendaraan->kendaraan_id]);
 
             return response()->json([
                 "status"=> "success",
@@ -48,7 +48,7 @@ class KendaraanController extends Controller
     {
         $kendaraan = Kendaraan::findOrFail($id);
 
-        Log::info("Data kendaraan ditemukan", ["nomor polisi kendaraan"=> $kendaraan->nomor_polisi]);
+        Log::info("Data kendaraan ditemukan", ["kendaraan id"=> $kendaraan->kendaraan_id]);
 
         return response()->json([
             "status"=> "success",

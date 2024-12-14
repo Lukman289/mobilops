@@ -5,12 +5,10 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Kantor;
 use Illuminate\Support\Facades\Log;
+use App\Http\Requests\KantorRequest;
 
 class KantorController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
         $kantor = Kantor::all();
@@ -24,26 +22,12 @@ class KantorController extends Controller
         ]);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
-        $request->validate([
-            "nama_kantor"=> "required|string",
-        ], [
-            "nama_kantor.required"=> "Nama kantor harus diisi",
-            "nama_kantor.string"=> "Nama kantor harus berupa string",
-        ]);
-
         try {
-            $kantor = new Kantor([
-                "nama_kantor"=> $request->name,
-            ]);
+            $kantor = Kantor::create($request->validated());
 
-            $kantor->save();
-
-            Log::info("Berhasil menambahkan data kantor", ["nama kantor"=> $request->name]);
+            Log::info("Berhasil menambahkan data kantor", ["nama kantor"=> $kantor->nama_kantor]);
 
             return response()->json([
                 "status"=> "success",
@@ -60,22 +44,11 @@ class KantorController extends Controller
         }
     }
 
-    /**
-     * Display the specified resource.
-     */
     public function show(string $id)
     {
-        $kantor = Kantor::find($id);
+        $kantor = Kantor::findOrFail($id);
 
         Log::info("Data kantor ditemukan", ["nama kantor"=> $kantor->nama_kantor]);
-
-        if (!$kantor) {
-            Log::error("Gagal menemukan data kantor", ["kantor id"=> $id]);
-            return response()->json([
-                "status"=> "failed",
-                "message"=> "Kantor tidak ditemukan",
-            ], 404);
-        }
 
         return response()->json([
             "status"=> "success",
@@ -84,34 +57,14 @@ class KantorController extends Controller
         ],200);
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(Request $request, string $id)
     {
         try {
-            $kantor = Kantor::find($id);
+            $kantor = Kantor::findOrFail($id);
 
-            if (!$kantor) {
-                Log::error("Gagal menemukan data kantor", ["kantor id"=> $id]);
-                return response()->json([
-                    "status"=> "failed",
-                    "message"=> "Kantor tidak ditemukan",
-                ], 404);
-            }
+            $kantor = $kantor::update($request->validated());
 
-            $request->validate([
-                "nama_kantor"=> "required|string",
-            ], [
-                "nama_kantor.required"=> "Nama kantor harus diisi",
-                "nama_kantor.string"=> "Nama kantor harus berupa string",
-            ]);
-
-            $kantor->update([
-                "nama_kantor"=> $request->name,
-            ]);
-
-            Log::info("Berhasil mengupdate kantor", ["nama kantor"=> $request->name]);
+            Log::info("Berhasil mengupdate kantor", ["nama kantor"=> $kantor->nama_kantor]);
 
             return response()->json([
                 "status"=> "success",
@@ -128,20 +81,9 @@ class KantorController extends Controller
         }
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(string $id)
     {
-        $kantor = Kantor::find($id);
-
-        if (!$kantor) {
-            Log::error("Gagal menemukan data kantor", ["kantor id"=> $id]);
-            return response()->json([
-                "status"=> "failed",
-                "message"=> "Kantor tidak ditemukan",
-            ],404);
-        }
+        $kantor = Kantor::findOrFail($id);
 
         $kantor->delete();
 
