@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\KantorRequest;
 use App\Models\Pegawai;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
@@ -22,7 +23,7 @@ class PegawaiController extends Controller
         ]);
     }
 
-    public function store(Request $request)
+    public function store(KantorRequest $request)
     {
         try {
             $pegawai = Pegawai::create($request->validated());
@@ -57,7 +58,7 @@ class PegawaiController extends Controller
         ],200);
     }
 
-    public function update(Request $request, string $id)
+    public function update(KantorRequest $request, string $id)
     {
         try {
             $pegawai = Pegawai::findOrFail($id);

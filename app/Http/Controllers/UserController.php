@@ -22,7 +22,7 @@ class UserController extends Controller
         ]);
     }
 
-    public function store(Request $request)
+    public function store(UserRequest $request)
     {
         try {
             $user = User::create($request->validated());
@@ -57,7 +57,7 @@ class UserController extends Controller
         ],200);
     }
 
-    public function update(Request $request, string $id)
+    public function update(UserRequest $request, string $id)
     {
         try {
             $user = User::findOrFail($id);

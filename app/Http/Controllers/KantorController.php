@@ -22,7 +22,7 @@ class KantorController extends Controller
         ]);
     }
 
-    public function store(Request $request)
+    public function store(KantorRequest $request)
     {
         try {
             $kantor = Kantor::create($request->validated());
@@ -57,7 +57,7 @@ class KantorController extends Controller
         ],200);
     }
 
-    public function update(Request $request, string $id)
+    public function update(KantorRequest $request, string $id)
     {
         try {
             $kantor = Kantor::findOrFail($id);

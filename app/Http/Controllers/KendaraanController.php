@@ -22,7 +22,7 @@ class KendaraanController extends Controller
         ]);
     }
 
-    public function store(Request $request)
+    public function store(KendaraanRequest $request)
     {
         try {
             $kendaraan = Kendaraan::create($request->validated());
@@ -57,7 +57,7 @@ class KendaraanController extends Controller
         ],200);
     }
 
-    public function update(Request $request, string $id)
+    public function update(KendaraanRequest $request, string $id)
     {
         try {
             $kendaraan = Kendaraan::findOrFail($id);

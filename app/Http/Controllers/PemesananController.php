@@ -22,7 +22,7 @@ class PemesananController extends Controller
         ]);
     }
 
-    public function store(Request $request)
+    public function store(PemesananRequest $request)
     {
         try {
             $pemesanan = Pemesanan::create($request->validated());
@@ -57,7 +57,7 @@ class PemesananController extends Controller
         ],200);
     }
 
-    public function update(Request $request, string $id)
+    public function update(PemesananRequest $request, string $id)
     {
         try {
             $pemesanan = Pemesanan::findOrFail($id);

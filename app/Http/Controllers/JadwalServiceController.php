@@ -22,7 +22,7 @@ class JadwalServiceController extends Controller
         ]);
     }
 
-    public function store(Request $request)
+    public function store(JadwalServiceRequest $request)
     {
         try {
             $jadwalService = JadwalService::create($request->validated());
@@ -57,7 +57,7 @@ class JadwalServiceController extends Controller
         ],200);
     }
 
-    public function update(Request $request, string $id)
+    public function update(JadwalServiceRequest $request, string $id)
     {
         try {
             $jadwalService = JadwalService::findOrFail($id);
