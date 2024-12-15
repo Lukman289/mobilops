@@ -1,5 +1,8 @@
 <?php
 
+use App\Http\Controllers\AdminController;
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ValidatorController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -17,21 +20,15 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/login', function () {
-    return view('auth.index');
+Route::get('/login', [AuthController::class,'index'])->name('login');
+Route::post('/login', [AuthController::class, 'login'])->name('login.auth');    
+Route::get('/logout', [AuthController::class,'logout'])->name('logout');
+
+Route::group(['middleware' => ['auth', 'checkRole:admin'] ,'prefix'=> 'admin'], function () {
+    Route::get('/', [AdminController::class, 'index']);
 });
 
-Route::get('/admin', function () {
-    return view('admin.index');
+Route::group(['middleware' => ['auth', 'checkRole:validator'] ,'prefix'=> 'validator'], function () {
+    Route::get('/', [ValidatorController::class,'index']);
 });
 
-Route::get('/validator', function () {
-    return view('validator.index');
-});
-
-// Route::get('/admin')->middleware('auth')->group(function () {
-//     Route::get('/', 'AdminController@index');
-//     Route::get('/dashboard', 'AdminController@dashboard');
-//     Route::get('/profile', 'AdminController@profile');
-//     Route::get('/settings', 'AdminController@settings');
-// });
