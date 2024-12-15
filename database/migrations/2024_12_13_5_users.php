@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('username')->unique();
             $table->string('password');
-            $table->enum('role', ['Admin', 'Pimpinan']);
+            $table->enum('role', ['admin', 'validator']);
             $table->unsignedBigInteger('pegawai_id');
             $table->rememberToken()->nullable();
             $table->timestamps();

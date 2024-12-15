@@ -27,7 +27,7 @@ class userSeeder extends Seeder
             [
                 'username' => 'rina',
                 'password' => bcrypt('rinapassword'),
-                'role' => 'pimpinan',
+                'role' => 'validator',
                 'pegawai_id' => 2,
                 'remember_token' => null,
                 'created_at' => now(),
@@ -36,7 +36,7 @@ class userSeeder extends Seeder
             [
                 'username' => 'andi',
                 'password' => bcrypt('andipassword'),
-                'role' => 'pimpinan',
+                'role' => 'validator',
                 'pegawai_id' => 3,
                 'remember_token' => null,
                 'created_at' => now(),
@@ -45,7 +45,7 @@ class userSeeder extends Seeder
             [
                 'username' => 'tetra',
                 'password' => bcrypt('tetrapassword'),
-                'role' => 'pimpinan',
+                'role' => 'validator',
                 'pegawai_id' => 4,
                 'remember_token' => null,
                 'created_at' => now(),
