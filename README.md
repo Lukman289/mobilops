@@ -1,66 +1,87 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+<p align="center"><img src="public\img\icon.png" width="400" alt="Laravel Logo"></p>
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
+## User Story
+
+Sebuah perusahaan tambang nikel berlokasi di beberapa daerah (region), satu kantor pusat, satu kantor cabang dan memiliki enam tambang dengan lokasi yang berbeda. Perusahaan tersebut mempunyai banyak kendaraan dengan jenis kendaraan angkutan orang dan angkutan barang. Selain kendaraan milik perusahaan, ada juga kendaraan yang disewa dari perusahaan persewaan. 
+
+Perusahaan tersebut membutuhkan sebuah web aplikasi untuk dapat memonitoring  kendaraan yang dimiliki. Mulai dari konsumsi BBM, jadwal service dan riwayat pemakaian kendaraan. Untuk dapat memakai kendaraan, pegawai diwajibkan untuk melakukan pemesanan terlebih dahulu ke pool atau bagian pengelola kendaraan dan pemakaian kendaraan harus diketahui atau disetujui oleh masing - masing atasan.
+
+## 
+
+<p align="center"> 
+<img src="https://th.bing.com/th/id/R.b81c0382fdfc29bc4a6603c1846f0acf?rik=AUACzJrX%2f0VCdA&riu=http%3a%2f%2fpngimg.com%2fuploads%2fphp%2fphp_PNG35.png&ehk=SDq0mYWBBsWE3A6HnxdvAQErErsuHxmn50YjvmaL83Q%3d&risl=&pid=ImgRaw&r=0" width="50">
+<img src="https://pngimg.com/uploads/mysql/mysql_PNG22.png" width="50">
+<img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="120">
 </p>
 
-## About Laravel
+- PHP 8.1.31
+- MySql 8.0.30
+- Laravel 10
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+##
+## Daftar Username & Password
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+<table style="width: 100%; border-collapse: collapse; border: 1px solid #ddd;">
+    <thead style="background-color:rgb(36, 36, 36);">
+        <tr>
+            <th style="padding: 8px; text-align: left; border: 1px solid #ddd;">No</th>
+            <th style="padding: 8px; text-align: left; border: 1px solid #ddd;">Username</th>
+            <th style="padding: 8px; text-align: left; border: 1px solid #ddd;">Password</th>
+            <th style="padding: 8px; text-align: left; border: 1px solid #ddd;">Role</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="padding: 8px; border: 1px solid #ddd;" >1</td>
+            <td style="padding: 8px; border: 1px solid #ddd;" >budi</td>
+            <td style="padding: 8px; border: 1px solid #ddd;" >admin1234</td>
+            <td style="padding: 8px; border: 1px solid #ddd;" >admin</td>
+        </tr>
+        <tr>
+            <td style="padding: 8px; border: 1px solid #ddd;" >2</td>
+            <td style="padding: 8px; border: 1px solid #ddd;" >andi</td>
+            <td style="padding: 8px; border: 1px solid #ddd;" >andipassword</td>
+            <td style="padding: 8px; border: 1px solid #ddd;" >validator</td>
+        </tr>
+        <tr>
+            <td style="padding: 8px; border: 1px solid #ddd;" >3</td>
+            <td style="padding: 8px; border: 1px solid #ddd;" >dewi</td>
+            <td style="padding: 8px; border: 1px solid #ddd;" >dewipassword</td>
+            <td style="padding: 8px; border: 1px solid #ddd;" >validator</td>
+        </tr>
+        <tr>
+            <td style="padding: 8px; border: 1px solid #ddd;" >4</td>
+            <td style="padding: 8px; border: 1px solid #ddd;" >eka</td>
+            <td style="padding: 8px; border: 1px solid #ddd;" >ekapassword</td>
+            <td style="padding: 8px; border: 1px solid #ddd;" >validator</td>
+        </tr>
+        <tr>
+            <td style="padding: 8px; border: 1px solid #ddd;" >5</td>
+            <td style="padding: 8px; border: 1px solid #ddd;" >fajar</td>
+            <td style="padding: 8px; border: 1px solid #ddd;" >fajarpassword</td>
+            <td style="padding: 8px; border: 1px solid #ddd;" >validator</td>
+        </tr>
+        <tr>
+            <td style="padding: 8px; border: 1px solid #ddd;" >6</td>
+            <td style="padding: 8px; border: 1px solid #ddd;" >gita</td>
+            <td style="padding: 8px; border: 1px solid #ddd;" >gitapassword</td>
+            <td style="padding: 8px; border: 1px solid #ddd;" >validator</td>
+        </tr>
+        <tr>
+            <td style="padding: 8px; border: 1px solid #ddd;" >7</td>
+            <td style="padding: 8px; border: 1px solid #ddd;" >hadi</td>
+            <td style="padding: 8px; border: 1px solid #ddd;" >hadipassword</td>
+            <td style="padding: 8px; border: 1px solid #ddd;" >validator</td>
+        </tr>
+        <tr>
+            <td style="padding: 8px; border: 1px solid #ddd;" >8</td>
+            <td style="padding: 8px; border: 1px solid #ddd;" >indah</td>
+            <td style="padding: 8px; border: 1px solid #ddd;" >indahpassword</td>
+            <td style="padding: 8px; border: 1px solid #ddd;" >validator</td>
+        </tr>
+    </tbody>
+</table>
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+##
 
-## Learning Laravel
-
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
-
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
-
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
-
-## Laravel Sponsors
-
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
-
-### Premium Partners
-
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
-
-## Contributing
-
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
-
-## Code of Conduct
-
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+## Panduan
