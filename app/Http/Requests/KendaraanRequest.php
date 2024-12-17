@@ -8,7 +8,7 @@ class KendaraanRequest extends FormRequest
 {
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
     
     public function rules(): array
@@ -19,6 +19,7 @@ class KendaraanRequest extends FormRequest
             "jenis_kendaraan"=> "required|string|in:Angkutan Orang,Angkutan Barang",
             "konsumsi_bbm"=> "required|numeric",
             "status_kepemilikan"=> "required|string|in:Milik Perusahaan,Sewa",
+            "lokasi_kendaraan_id"=> "required|exists:kantors,id",
         ];
     }
 
@@ -35,6 +36,8 @@ class KendaraanRequest extends FormRequest
             "konsumsi_bbm.required"=> "Konsumsi BBM harus diisi",
             "status_kepemilikan.enum"=> "Status kepemilikan harus Milik Perusahaan atau Sewa",
             "status_kepemilikan.required"=> "Statu kepemilikan harus diisi",
+            "lokasi_kendaraan_id.required"=> "Lokasi kendaraan harus diisi",
+            "lokasi_kendaraan_id.exists"=> "Lokasi kendaraan tidak ditemukan",
         ];
     }
 }
