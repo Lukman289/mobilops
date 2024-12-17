@@ -8,5 +8,11 @@ class ValidatorController extends Controller
 {
     public function index() {
         return view("validator.index");
-    }    
+    }   
+    
+    public function approve(Request $request) {
+        $validated = $request->all();
+
+        dd($validated);
+    }
 }

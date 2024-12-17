@@ -11,4 +11,14 @@ class Kantor extends Model
     protected $fillable = [
         "nama_kantor",
     ];
+
+    public function getKendaraan()
+    {
+        return $this->hasMany(Kendaraan::class, 'lokasi_kendaraan_id');
+    }
+
+    public function getPegawai()
+    {
+        return $this->hasMany(Pegawai::class);
+    }
 }

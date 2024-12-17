@@ -11,50 +11,49 @@ class KantorController extends Controller
 {
     public function index()
     {
-        $kantor = Kantor::all();
+        $kantors = Kantor::all();
 
-        Log::info(" Berhasil mengambil data kantor", ["total data" => count($kantor)]);
+        Log::info(" Berhasil mengambil data kantor", ["total data" => count($kantors)]);
 
-        return response()->json([
-            "status"=> "success",
-            "message"=> "Berhasil mengambil data kantor",
-            "data"=> $kantor,
-        ]);
+        return view("admin.kantor.index", ["kantors"=> $kantors]);
+    }
+
+    public function create()
+    {
+        return view("admin.kantor.add");
     }
 
     public function store(KantorRequest $request)
     {
         try {
-            $kantor = Kantor::create($request->validated());
+            $kantors = Kantor::create($request->validated());
 
-            Log::info("Berhasil menambahkan data kantor", ["nama kantor"=> $kantor->nama_kantor]);
+            Log::info("Berhasil menambahkan data kantor", ["nama kantor"=> $kantors->nama_kantor]);
 
-            return response()->json([
-                "status"=> "success",
-                "message"=> "Data kantor berhasil ditambahkan",
-                "data"=> $kantor
-            ], 201);
+            return redirect()->route("kantor")->with("success","Berhasil menambahkan data kantor");
         } catch (\Exception $e) {
             Log::error("Gagal menambahkan data kantor", ["error_message"=> $e->getMessage()]);
-            return response()->json([
-                "status"=> "failed",
-                "message"=> "data kantor gagal ditambahkan",
-                "error"=> $e->getMessage(),
-            ], 400);
+
+            return redirect()->route("admin.kantor.add")->with("error","Galat menambahkan data kantor");
         }
     }
 
     public function show(string $id)
     {
+        $kantor = Kantor::with(['getKendaraan', 'getPegawai'])->findOrFail($id);
+
+        $jumlahKendaraan = $kantor->getKendaraan->count();
+        $jumlahPegawai = $kantor->getPegawai->count();
+        
+        Log::info("Data kantor ditemukan", ["nama kantor"=> $kantor->nama_kantor, "jumlah kendaraan"=> $jumlahKendaraan, "jumlah pegawai"=> $jumlahPegawai]);
+        
+        return view('admin.kantor.detail', compact('kantor', 'jumlahKendaraan', 'jumlahPegawai'));
+    }
+
+    public function edit($id)
+    {
         $kantor = Kantor::findOrFail($id);
-
-        Log::info("Data kantor ditemukan", ["nama kantor"=> $kantor->nama_kantor]);
-
-        return response()->json([
-            "status"=> "success",
-            "message"=> "Berhasil mengambil data kantor",
-            "data"=> $kantor,
-        ],200);
+        return view('admin.kantor.edit', compact('kantor'));
     }
 
     public function update(KantorRequest $request, string $id)
@@ -62,36 +61,26 @@ class KantorController extends Controller
         try {
             $kantor = Kantor::findOrFail($id);
 
-            $kantor = $kantor::update($request->validated());
+            $kantor->update($request->validated());
 
             Log::info("Berhasil mengupdate kantor", ["nama kantor"=> $kantor->nama_kantor]);
 
-            return response()->json([
-                "status"=> "success",
-                "message"=> "Kantor berhasil diupdate",
-                "data"=> $kantor,
-            ], 200);
+            return redirect()->route("kantor")->with("success","Berhasil mengupdate kantor");
         } catch (\Exception $e) {
             Log::error("Gagal mengupdate kantor", ["error_message"=> $e->getMessage()]);
-            return response()->json([
-                "status"=> "failed",
-                "message"=> "Kantor gagal diupdate",
-                "error"=> $e->getMessage(),
-            ], 400);
+            
+            return redirect()->route("kantor.edit")->with("error", "Gagal mengupdate kantor");
         }
     }
 
     public function destroy(string $id)
     {
-        $kantor = Kantor::findOrFail($id);
+        $kantors = Kantor::findOrFail($id);
 
-        $kantor->delete();
+        $kantors->delete();
 
         Log::info("Berhasil menghapus data kantor", ["kantor id"=> $id]);
 
-        return response()->json([
-            "status"=> "success",
-            "message"=> "Kantor berhasil dihapus",
-        ], 200);
+        return redirect()->route("kantor")->with("success","Berhasil menghapus data kantor");
     }
 }

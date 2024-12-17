@@ -16,4 +16,9 @@ class Kendaraan extends Model
         "status_kepemilikan",
         "lokasi_kendaraan_id",
     ];
+
+    public function lokasiKendaraan()
+    {
+        return $this->belongsTo(Kantor::class, 'lokasi_kendaraan_id');
+    }
 }

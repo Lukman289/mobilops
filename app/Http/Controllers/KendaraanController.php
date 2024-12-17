@@ -4,94 +4,99 @@ namespace App\Http\Controllers;
 
 use App\Models\Kendaraan;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use App\Http\Requests\KendaraanRequest;
+use App\Models\Kantor;
 
 class KendaraanController extends Controller
 {
-    public function index()
+    public function index(): Factory|View
     {
-        $kendaraan = Kendaraan::all();
+        $kendaraans = Kendaraan::with('lokasiKendaraan')->get();
 
-        Log::info(" Berhasil mengambil data kendaraan", ["total data" => count($kendaraan)]);
+        Log::info("Berhasil mengambil data kendaraan", ["total data" => count($kendaraans)]);
 
-        return response()->json([
-            "status"=> "success",
-            "message"=> "Berhasil mengambil data kendaraan",
-            "data"=> $kendaraan,
-        ]);
+        return view("admin.kendaraan.index", compact("kendaraans"));
     }
 
-    public function store(KendaraanRequest $request)
+    public function create() {
+        $kantors = Kantor::all();
+
+        Log::info("Berhasil mengambil data kantor", ["total data" => count($kantors)]);
+
+        return view("admin.kendaraan.add", compact("kantors"));
+    }
+
+    public function store(KendaraanRequest $request): RedirectResponse
     {
         try {
             $kendaraan = Kendaraan::create($request->validated());
 
-            Log::info("Berhasil menambahkan kendaraan", ["kendaraan id"=> $kendaraan->kendaraan_id]);
+            Log::info("Berhasil menambahkan kendaraan", ["kendaraan id"=> $kendaraan->id]);
+            Log::info("Berhasil menambahkan kendaraan", ["isi data"=> $kendaraan]);
 
-            return response()->json([
-                "status"=> "success",
-                "message"=> "Data kendaraan berhasil ditambahkan",
-                "data"=> $kendaraan
-            ], 201);
+            return redirect()->route("kendaraan")->with("success", "Data kendaraan berhasil ditambahkan");
         } catch (\Exception $e) {
             Log::error("Gagal menambahkan kendaraan", ["error_message"=> $e->getMessage()]);
-            return response()->json([
-                "status"=> "failed",
-                "message"=> "Data kendaraan gagal ditambahkan",
-                "error"=> $e->getMessage(),
-            ], 400);
+
+            return redirect()->route("kendaraan.create")->with("error", "Data kendaraan gagal ditambahkan");
         }
     }
 
-    public function show(string $id)
+    public function show(string $id): Factory|View
     {
-        $kendaraan = Kendaraan::findOrFail($id);
+        $kendaraan = Kendaraan::with('lokasiKendaraan')->findOrFail($id);
 
-        Log::info("Data kendaraan ditemukan", ["kendaraan id"=> $kendaraan->kendaraan_id]);
 
-        return response()->json([
-            "status"=> "success",
-            "message"=> "Berhasil mengambil data kendaraan",
-            "data"=> $kendaraan,
-        ],200);
+        Log::info("Data kendaraan ditemukan", ["data"=> $kendaraan]);
+        Log::info("Data kendaraan ditemukan", ["kendaraan id"=> $kendaraan->id]);
+
+        return view("admin.kendaraan.detail", compact("kendaraan"));
     }
 
-    public function update(KendaraanRequest $request, string $id)
+    public function edit(string $id): Factory|View
+    {
+        $kendaraan = Kendaraan::with('lokasiKendaraan')->findOrFail($id);
+        $kantors = Kantor::all();
+
+        return view("admin.kendaraan.edit", compact("kendaraan", "kantors"));
+    }
+
+    public function update(KendaraanRequest $request, string $id): RedirectResponse
     {
         try {
             $kendaraan = Kendaraan::findOrFail($id);
 
-            $kendaraan = $kendaraan->update($request->validated());
+            $kendaraan->update($request->validated());
+            
+            Log::info("Berhasil mengupdate kendaraan", ["kendaraan id"=> $id]);
 
-            Log::info("Berhasil mengupdate kendaraan", ["kendaraan id"=> $kendaraan->kendaraan_id]);
-
-            return response()->json([
-                "status"=> "success",
-                "message"=> "kendaraan berhasil diupdate",
-                "data"=> $kendaraan,
-            ], 200);
+            return redirect()->route("kendaraan")->with("success","Kendaraan $kendaraan->nomor_polisi berhasil diupdate");
         } catch (\Exception $e) {
             Log::error("Gagal mengupdate kendaraan", ["error_message"=> $e->getMessage()]);
-            return response()->json([
-                "status"=> "failed",
-                "message"=> "kendaraan gagal diupdate",
-                "error"=> $e->getMessage(),
-            ], 400);
+
+            return redirect()->route("kendaraan.edit", $id)->with("error", "Data kendaraan gagal diupdate");
         }
     }
 
-    public function destroy(string $id)
+    public function destroy(string $id): RedirectResponse
     {
-        $kendaraan = Kendaraan::findOrFail($id);
+        Log::info("delete", ["delete id"=> $id]);
+        try {
+            $kendaraan = Kendaraan::findOrFail($id);
 
-        $kendaraan->delete();
+            $kendaraan->delete();
 
-        Log::info("Berhasil menghapus data kendaraan", ["kendaraan id"=> $id]);
+            Log::info("Berhasil menghapus data kendaraan", ["kendaraan id"=> $id]);
 
-        return response()->json([
-            "status"=> "success",
-            "message"=> "kendaraan berhasil dihapus",
-        ], 200);
+            return redirect()->route("kendaraan", $id)->with("success", "Kendaraan $kendaraan->nomor_polisi berhasil dihapus");
+        } catch (\Exception $e) {
+            Log::error("Gagal menghapus kendaraan", ["error_message"=> $e->getMessage()]);
+
+            return redirect()->route("kendaraan", $id)->with("error", 'Data kendaraan gagal dihapus');
+        }
     }
 }
