@@ -16,8 +16,8 @@ class UserRequest extends FormRequest
         return [
             "username"=> "required|string|unique:users,username",
             "password"=> "required|string",
-            "role"=> "required|string|in:Admin,Pegawai",
-            "pegawai_id"=> "required|exists:pegawais,pegawai_id",
+            "role"=> "required|string|in:admin,validator",
+            "pegawai_id"=> "required|exists:pegawais,id",
         ];
     }
 

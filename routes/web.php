@@ -7,6 +7,7 @@ use App\Http\Controllers\KantorController;
 use App\Http\Controllers\KendaraanController;
 use App\Http\Controllers\PegawaiController;
 use App\Http\Controllers\PemesananController;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\ValidatorController;
 use Illuminate\Support\Facades\Route;
 
@@ -71,6 +72,14 @@ Route::group(['middleware' => ['auth', 'checkRole:admin'] ,'prefix'=> 'admin'], 
     Route::get('/service/edit/{id}', [JadwalServiceController::class, 'edit'])->name('service.edit');
     Route::put('/service/edit/{id}', [JadwalServiceController::class, 'update'])->name('service.update');
     Route::delete('/service/{id}', [JadwalServiceController::class,'destroy'])->name('service.delete');
+    
+    Route::get('/user', [UserController::class, 'index'])->name('user');
+    Route::get('/user/add', [UserController::class, 'create'])->name('user.create');
+    Route::post('/user/add', [UserController::class, 'store'])->name('user.store');
+    Route::get('/user/detail/{id}', [UserController::class, 'show'])->name('user.show');
+    Route::get('/user/edit/{id}', [UserController::class, 'edit'])->name('user.edit');
+    Route::put('/user/edit/{id}', [UserController::class, 'update'])->name('user.update');
+    Route::delete('/user/{id}', [UserController::class,'destroy'])->name('user.delete');
 });
 
 Route::group(['middleware' => ['auth', 'checkRole:validator'] ,'prefix'=> 'validator'], function () {

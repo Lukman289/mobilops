@@ -24,6 +24,11 @@ class Pegawai extends Model
     public function pimpinan()
     {
         return $this->belongsTo(Pegawai::class, 'pimpinan_id');
-}
+    }
+
+    public function user()
+    {
+        return $this->hasOne(User::class);
+    }
 
 }

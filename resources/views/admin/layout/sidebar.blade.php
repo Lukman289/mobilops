@@ -42,7 +42,8 @@
             </a>
         </li>
         <li>
-            <a href="#" class="nav-link link-dark">
+            <a href="{{ route('user') }}" 
+                class="nav-link {{ strpos(Route::currentRouteName(), 'user') === 0 ? 'active' : 'link-dark' }}">
                 <i class="bi bi-person-circle me-2" style="font-size: 20px;"></i> User
             </a>
         </li>
