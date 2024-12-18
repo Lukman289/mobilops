@@ -15,7 +15,7 @@ class JadwalServiceRequest extends FormRequest
     {
         return [
             "tanggal_service"=> "required|date",
-            "kendaraan_id"=> "required|string|exists:kendaraans,kendaraan_id",
+            "kendaraan_id"=> "required|string|exists:kendaraans,id",
         ];
     }
 

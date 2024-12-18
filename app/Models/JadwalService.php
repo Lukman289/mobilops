@@ -12,4 +12,8 @@ class JadwalService extends Model
         "tanggal_service",
         "kendaraan_id",
     ];
+
+    public function getKendaraan() {
+        return $this->belongsTo(Kendaraan::class, "kendaraan_id");
+    }
 }
