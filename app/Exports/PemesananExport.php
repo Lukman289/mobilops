@@ -23,10 +23,10 @@ class PemesananExport implements FromCollection, WithHeadings, WithMapping
             'Status Pengajuan',
             'Tanggal Pemesanan',
             'Tanggal Pemakaian',
-            'Kendaraan ID',
+            'Nomor Polisi Kendaraan',
             'Lokasi Peminjaman ID',
-            'Driver ID',
-            'Pengesah ID',
+            'Nama Driver',
+            'Nama Pengesah',
             'Created At',
             'Updated At'
         ];
