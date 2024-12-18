@@ -49,7 +49,7 @@ Route::group(['middleware' => ['auth', 'checkRole:admin'] ,'prefix'=> 'admin'], 
     Route::delete('/pegawai/{id}', [PegawaiController::class,'destroy'])->name('pegawai.delete');
 
     Route::get('/pemesanan', [PemesananController::class, 'index'])->name('pemesanan');
-    Route::get('/pemesanan/add', [PemesananController::class, 'create'])->name('pemesanan.add');
+    Route::get('/pemesanan/add', [PemesananController::class, 'create'])->name('pemesanan.create');
     Route::post('/pemesanan/add', [PemesananController::class, 'store'])->name('pemesanan.store');
     Route::get('/pemesanan/detail/{id}', [PemesananController::class, 'show'])->name('pemesanan.show');
     Route::get('/pemesanan/edit/{id}', [PemesananController::class, 'edit'])->name('pemesanan.edit');

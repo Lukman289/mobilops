@@ -14,23 +14,19 @@ class PemesananRequest extends FormRequest
     public function rules(): array
     {
         return [
-            "status_pemesanan"=> "required|string|in:Menunggu,Proses,Selesai",
-            "tanggal_pemesanan"=> "required|date",
+            "status_pengajuan"=> "required|string|in:Menunggu,Disetujui,Ditolak",
             "tanggal_pemakaian"=> "required|date",
-            "kendaraan_id"=> "required|string|exists:kendaraans,kendaraan_id",
-            "lokasi_peminjaman_id"=> "required|exists:kantors,kantor_id",
-            "driver_id"=> "required|exists:pegawais,pegawai_id",
-            "pengesah_id"=> "required|exists:pegawais,pegawai_id",
+            "kendaraan_id"=> "required|string|exists:kendaraans,id",
+            "lokasi_peminjaman_id"=> "required|exists:kantors,id",
+            "driver_id"=> "required|exists:pegawais,id",
         ];
     }
 
     public function messages(): array
     {
         return [
-            "status_pemesanan.required"=> "Status pemesanan harus diisi",
-            "status_pemesanan.in"=> "Status pemesanan harus berupa Menunggu, Proses, atau Selesai",
-            "tanggal_pemesanan.required"=> "Tanggal pemesanan harus diisi",
-            "tanggal_pemesanan.date"=> "Tanggal pemesanan harus berupa format tanggal",
+            "status_pengajuan.required"=> "Status pemesanan harus diisi",
+            "status_pengajuan.in"=> "Status pemesanan harus salah satu dari Menunggu, Disetujui, atau Ditolak",
             "tanggal_pemakaian.required"=> "Tanggal pemakaian harus diisi",
             "tanggal_pemakaian.date"=> "Tanggal pemakaian harus berupa format tanggal",
             "kendaraan_id.required"=> "Kendaraan harus diisi",
@@ -39,8 +35,6 @@ class PemesananRequest extends FormRequest
             "lokasi_peminjaman_id.exists"=> "Lokasi peminjaman tidak ditemukan",
             "driver_id.required"=> "Driver harus diisi",
             "driver_id.exists"=> "Driver tidak ditemukan",
-            "pengesah_id.required"=> "Pengesah harus diisi",
-            "pengesah_id.exists"=> "Pengesah tidak ditemukan",
         ];
     }
 }

@@ -1,5 +1,6 @@
 <?php
 
+use Carbon\Carbon;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -14,7 +15,7 @@ return new class extends Migration
         Schema::create('pemesanans', function (Blueprint $table) {
             $table->id();
             $table->enum('status_pengajuan', ['Menunggu', 'Disetujui', 'Ditolak'])->default('Menunggu');
-            $table->dateTime('tanggal_pemesanan');
+            $table->dateTime('tanggal_pemesanan')->default(Carbon::now());
             $table->dateTime('tanggal_pemakaian');
             $table->unsignedBigInteger('kendaraan_id')->nullable();
             $table->unsignedBigInteger('lokasi_peminjaman_id')->nullable();
