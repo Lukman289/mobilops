@@ -14,6 +14,9 @@
     <div class="mb-3">
         <a href="{{ route('pemesanan.create') }}" class="btn btn-primary">Tambah Pemesanan Baru</a>
     </div>
+    <div class="mb-3">
+        <a href="{{ route('pemesanan.export') }}" class="btn btn-success">Export Excel</a>
+    </div>
     <div class="card">
         <div class="card-header">
             <strong>Daftar Pemesanan Kendaraan</strong>
@@ -42,7 +45,6 @@
                             <td>{{ $pemesanan->tanggal_pemakaian }}</td>
                             <td>{{ $pemesanan->getKendaraan->nomor_polisi }}</td>
                             <td>{{ $pemesanan->getLokasi->nama_kantor }}</td>
-                            {{-- <td>{{ $pemesanan->getPengesah->nama_pegawai }}</td> --}}
                             <td>{{ $pemesanan->pengesah_id ? $pemesanan->getPengesah->nama_pegawai : 'Pimpinan'}}</td>
                             <td>
                                 @if ($pemesanan->status_pengajuan === 'Menunggu')

@@ -9,6 +9,8 @@ use App\Http\Requests\PemesananRequest;
 use App\Models\Kantor;
 use App\Models\Kendaraan;
 use App\Models\Pegawai;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\PemesananExport;
 
 class PemesananController extends Controller
 {
@@ -98,6 +100,11 @@ class PemesananController extends Controller
             
             return redirect()->route("pemesanan.edit")->with("error", "Gagal mengupdate pemesanan");
         }
+    }
+
+    public function export()
+    {
+        return Excel::download(new PemesananExport, 'data_pemesanan.xlsx');
     }
 
     public function destroy(string $id)

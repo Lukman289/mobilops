@@ -1,5 +1,6 @@
 <?php
 
+use App\Exports\PemesananExport;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\JadwalServiceController;
@@ -10,6 +11,7 @@ use App\Http\Controllers\PemesananController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ValidatorController;
 use Illuminate\Support\Facades\Route;
+use Maatwebsite\Excel\Facades\Excel;
 
 /*
 |--------------------------------------------------------------------------
@@ -55,7 +57,11 @@ Route::group(['middleware' => ['auth', 'checkRole:admin'] ,'prefix'=> 'admin'], 
     Route::get('/pemesanan/detail/{id}', [PemesananController::class, 'show'])->name('pemesanan.show');
     Route::get('/pemesanan/edit/{id}', [PemesananController::class, 'edit'])->name('pemesanan.edit');
     Route::put('/pemesanan/edit/{id}', [PemesananController::class, 'update'])->name('pemesanan.update');
+    Route::get('/pemesanan/export', [PemesananController::class, 'export'])->name('pemesanan.export');
     Route::delete('/pemesanan/{id}', [PemesananController::class,'destroy'])->name('pemesanan.delete');
+    // Route::get('pemesanan/export-pemesanan', function () {
+    //     return Excel::download(new PemesananExport, 'pemesanan.xlsx');
+    // });
     
     Route::get('/kantor', [KantorController::class, 'index'])->name('kantor');
     Route::get('/kantor/add', [KantorController::class, 'create'])->name('kantor.create');
