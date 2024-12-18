@@ -18,8 +18,8 @@ class PegawaiRequest extends FormRequest
             "no_hp"=> "required|string",
             "email"=> "required|email|unique:pegawais,email",
             "jabatan"=> "required|string|in:Pimpinan,Pegawai",
-            "kantor_id"=> "required|exists:kantors,kantor_id",
-            "pimpinan_id"=> "required|exists:pegawais,pegawai_id",
+            "kantor_id"=> "required|exists:kantors,id",
+            "pimpinan_id"=> "required|exists:pegawais,id",
         ];
     }
 

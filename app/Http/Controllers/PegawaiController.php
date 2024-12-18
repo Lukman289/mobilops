@@ -2,97 +2,94 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\KantorRequest;
 use App\Models\Pegawai;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use App\Http\Requests\PegawaiRequest;
+use App\Models\Kantor;
 
 class PegawaiController extends Controller
 {
     public function index()
     {
-        $pegawai = Pegawai::all();
+        $pegawais = Pegawai::with('lokasiBekerja', 'pimpinan')->orderBy('kantor_id', 'asc')->get();
 
-        Log::info(" Berhasil mengambil data pegawai", ["total data" => count($pegawai)]);
+        Log::info(" Berhasil mengambil data pegawai", ["total data" => count($pegawais)]);
 
-        return response()->json([
-            "status"=> "success",
-            "message"=> "Berhasil mengambil data pegawai",
-            "data"=> $pegawai,
-        ]);
+        return view("admin.pegawai.index", compact("pegawais"));
     }
 
-    public function store(KantorRequest $request)
+    public function create() {
+        $kantors = Kantor::class::all();
+        $pemimpins = Pegawai::where("jabatan", "Pimpinan")->get();
+
+        return view("admin.pegawai.add", compact("kantors","pemimpins"));
+    }
+
+    public function store(PegawaiRequest $request)
     {
         try {
             $pegawai = Pegawai::create($request->validated());
 
             Log::info("Berhasil menambahkan data pegawai", ["nama pegawai"=> $pegawai->nama_pegawai]);
 
-            return response()->json([
-                "status"=> "success",
-                "message"=> "Data pegawai berhasil ditambahkan",
-                "data"=> $pegawai
-            ], 201);
+            return redirect()->route("pegawai")->with("success","Berhasil menambahkan data pegawai");
         } catch (\Exception $e) {
             Log::error("Gagal menambahkan data pegawai", ["error_message"=> $e->getMessage()]);
-            return response()->json([
-                "status"=> "failed",
-                "message"=> "data pegawai gagal ditambahkan",
-                "error"=> $e->getMessage(),
-            ], 400);
+            
+            return redirect()->route("pegawai.add")->with("error","Gagal menambahkan data pegawai");
         }
     }
 
     public function show(string $id)
     {
-        $pegawai = Pegawai::findOrFail($id);
+        $pegawai = Pegawai::with('lokasiBekerja', 'pimpinan')->findOrFail($id);
 
         Log::info("Data pegawai ditemukan", ["nama pegawai"=> $pegawai->nama_pegawai]);
 
-        return response()->json([
-            "status"=> "success",
-            "message"=> "Berhasil mengambil data pegawai",
-            "data"=> $pegawai,
-        ],200);
+        return view("admin.pegawai.detail", compact("pegawai"));
     }
 
-    public function update(KantorRequest $request, string $id)
+    public function edit(string $id)
+    {
+        $pegawai = Pegawai::findOrFail($id);
+        $kantors = Kantor::all();
+        $pemimpins = Pegawai::where('jabatan', 'Pimpinan')->get();
+
+        return view("admin.pegawai.edit", compact("pegawai", "kantors", "pemimpins"));
+    }
+
+    public function update(PegawaiRequest $request, string $id)
     {
         try {
             $pegawai = Pegawai::findOrFail($id);
 
-            $pegawai = $pegawai::update($request->validated());
+            $pegawai->update($request->validated());
 
             Log::info("Berhasil mengupdate pegawai", ["nama pegawai"=> $pegawai->nama_pegawai]);
 
-            return response()->json([
-                "status"=> "success",
-                "message"=> "pegawai berhasil diupdate",
-                "data"=> $pegawai,
-            ], 200);
+            return redirect()->route("pegawai")->with("success","Berhasil mengupdate pegawai");
         } catch (\Exception $e) {
             Log::error("Gagal mengupdate pegawai", ["error_message"=> $e->getMessage()]);
-            return response()->json([
-                "status"=> "failed",
-                "message"=> "pegawai gagal diupdate",
-                "error"=> $e->getMessage(),
-            ], 400);
+            
+            return redirect()->route("pegawai.edit")->with("error","Gagal mengupdate pegawai");
         }
     }
 
     public function destroy(string $id)
     {
-        $pegawai = Pegawai::findOrFail($id);
+        try {
+            $pegawai = Pegawai::findOrFail($id);
 
-        $pegawai->delete();
+            $pegawai->delete();
 
-        Log::info("Berhasil menghapus data pegawai", ["pegawai id"=> $id]);
+            Log::info("Berhasil menghapus data pegawai", ["pegawai id"=> $id]);
 
-        return response()->json([
-            "status"=> "success",
-            "message"=> "pegawai berhasil dihapus",
-        ], 200);
+            return redirect()->route("pegawai")->with("success","Berhasil menghapus data pegawai");
+        } catch (\Exception $e) {
+            Log::error("Gagal menghapus data pegawai", ["error_message"=> $e->getMessage()]);
+
+            return redirect()->route("pegawai")->with("error","Gagal menghapus data pegawai");
+        }
     }
 }
