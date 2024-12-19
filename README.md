@@ -1,4 +1,4 @@
-<p align="center"><img src="public\img\icon.png" width="400" alt="Laravel Logo"></p>
+<p align="center"><img src="public\img\icon.png" width="400"></p>
 
 ## User Story
 
@@ -83,22 +83,109 @@ Perusahaan tersebut membutuhkan sebuah web aplikasi untuk dapat memonitoring  ke
 </table>
 
 ##
+## Panduan Penggunaan Aplikasi
 
-## Panduan
-
-### Pemesnaan
-- Login
-    - Pastikan mempunyai username dan password
-    - Akses website mobilops
-    - Klik button login
-    - Masukkan username dan password
-    - Lakukan login
-- Buat Pemesanan
-    - Akses menu operasional kendaraan
+### Manajemen Operasional/Peminjaman Kendaraan
+- Login dengan dengan akun yang memiliki role admin
+- Akses menu operasional kendaraan
+- Tambah Pengajuan Peminjaman
     - Klik tombol Tambah Pemesanan Baru
-    - Isi form sesuai dengan yang diperlukan
+    - Isi form yang tersedia
     - Kirim data
     - Menunggu status pengajuan
+- Edit Pengajuan Peminjaman 
+    - Klik tombol Edit
+    - Isi form yang tersedia
+    - Kirim data
+- Hapus Pengajuan Peminjaman
+    - Klik tombol hapus
+    - Konfirmasi penghapusan data
 
+#
+### Manajemen Pegawai
+- Login dengan dengan akun yang memiliki role admin
+- Akses menu pegawai
+- Tambah Pegawai
+    - Klik tombol Tambah Pegawai Baru
+    - Isi form sesuai dengan yang diperlukan
+    - Kirim data
+- Edit Pegawai 
+    - Klik tombol Edit
+    - Isi form yang tersedia
+    - Kirim data
+- Hapus Pegawai
+    - Klik tombol hapus
+    - Konfirmasi penghapusan data
 
-## 
+#
+### Manajemen Kendaraan
+- Login dengan dengan akun yang memiliki role admin
+- Akses menu Kendaraan
+- Tambah Kendaraan
+    - Klik tombol Tambah Kendaraan Baru
+    - Isi form sesuai dengan yang diperlukan
+    - Kirim data
+- Edit Kendaraan 
+    - Klik tombol Edit
+    - Isi form yang tersedia
+    - Kirim data
+- Hapus Kendaraan
+    - Klik tombol hapus
+    - Konfirmasi penghapusan data
+
+#
+### Manajemen Jadwal Service Kendaraan
+- Login dengan dengan akun yang memiliki role admin
+- Akses menu Jadwal Service Kendaraan
+- Tambah Jadwal Service Kendaraan
+    - Klik tombol Tambah Jadwal Service Kendaraan Baru
+    - Isi form sesuai dengan yang diperlukan
+    - Kirim data
+- Edit Jadwal Service Kendaraan 
+    - Klik tombol Edit
+    - Isi form yang tersedia
+    - Kirim data
+- Hapus Jadwal Service Kendaraan
+    - Klik tombol hapus
+    - Konfirmasi penghapusan data
+
+#
+### Manajemen Kantor
+- Login dengan dengan akun yang memiliki role admin
+- Akses menu Kantor
+- Tambah Kantor
+    - Klik tombol Tambah Kantor Baru
+    - Isi form sesuai dengan yang diperlukan
+    - Kirim data
+- Edit Kantor 
+    - Klik tombol Edit
+    - Isi form yang tersedia
+    - Kirim data
+- Hapus Kantor
+    - Klik tombol hapus
+    - Konfirmasi penghapusan data
+
+#
+### Manajemen User
+- Login dengan dengan akun yang memiliki role admin
+- Akses menu User
+- Tambah User
+    - Klik tombol Tambah User Baru
+    - Isi form sesuai dengan yang diperlukan
+    - Kirim data
+- Edit User 
+    - Klik tombol Edit
+    - Isi form yang tersedia
+    - Kirim data
+- Hapus User
+    - Klik tombol hapus
+    - Konfirmasi penghapusan data
+
+#
+### Validasi Pengajuam Peminjaman Kendaraan
+- Login dengan dengan akun yang memiliki role validator
+- Klik tombol hijau/setuju untuk menyetujui pengajuan peminjaman kendaraan
+- Klik tombol hijau/setuju untuk menolak pengajuan peminjaman kendaraan
+
+## Physical Data Model
+<img src="public\img\pdm_mobilops.png">
