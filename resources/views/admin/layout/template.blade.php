@@ -24,52 +24,5 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script>
-        // Data for the chart
-        const salesData = {
-            labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
-            datasets: [{
-                label: 'Sales Revenue ($)',
-                data: [5000, 6000, 7000, 8000, 9500, 10500, 11000, 12000, 13500, 14000, 14500, 15000],
-                borderColor: '#007bff',
-                backgroundColor: 'rgba(0, 123, 255, 0.2)',
-                borderWidth: 2,
-                tension: 0.4,
-            }]
-        };
-
-        // Config for the chart
-        const salesConfig = {
-            type: 'line',
-            data: salesData,
-            options: {
-                responsive: true,
-                scales: {
-                    x: {
-                        beginAtZero: true
-                    },
-                    y: {
-                        beginAtZero: true
-                    }
-                },
-                plugins: {
-                    legend: {
-                        position: 'top',
-                    },
-                    tooltip: {
-                        callbacks: {
-                            label: function(tooltipItem) {
-                                return '$' + tooltipItem.raw.toLocaleString(); // Formatting the tooltip
-                            }
-                        }
-                    }
-                }
-            }
-        };
-
-        // Render the chart
-        const ctx = document.getElementById('salesChart').getContext('2d');
-        new Chart(ctx, salesConfig);
-    </script>
 </body>
 </html>

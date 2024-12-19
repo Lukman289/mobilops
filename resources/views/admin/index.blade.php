@@ -6,28 +6,25 @@
         <!-- Summary Cards -->
         <div class="col-md-4 mb-4">
             <div class="card text-white bg-primary">
-                <div class="card-header">Total Users</div>
+                <div class="card-header">Total Peminjaman</div>
                 <div class="card-body">
-                    <h5 class="card-title">1200</h5>
-                    <p class="card-text">Total registered users in the system.</p>
+                    <h3 class="card-title">{{ $total }}</h3>
                 </div>
             </div>
         </div>
         <div class="col-md-4 mb-4">
             <div class="card text-white bg-success">
-                <div class="card-header">Active Orders</div>
+                <div class="card-header">Peminjaman Dalam Proses</div>
                 <div class="card-body">
-                    <h5 class="card-title">450</h5>
-                    <p class="card-text">Orders currently being processed.</p>
+                    <h3 class="card-title">{{ $totalRequest }}</h3>
                 </div>
             </div>
         </div>
         <div class="col-md-4 mb-4">
             <div class="card text-white bg-danger">
-                <div class="card-header">Pending Requests</div>
+                <div class="card-header">Total Kendaraan</div>
                 <div class="card-body">
-                    <h5 class="card-title">32</h5>
-                    <p class="card-text">Requests waiting for approval or action.</p>
+                    <h3 class="card-title">{{ $totalKendaraan }}</h3>
                 </div>
             </div>
         </div>
@@ -37,15 +34,15 @@
     <div class="row mb-4">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">Sales Analytics</div>
+                <div class="card-header">Grafik Pemakaian Kendaraan</div>
                 <div class="card-body">
                     <div id="chart-container" style="height: 300px; width: 100%;">
-                        <canvas id="salesChart"></canvas>
+                        <canvas id="pemesananChart"></canvas>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="col-md-4">
+        {{-- <div class="col-md-4">
             <div class="card">
                 <div class="card-header">Quick Stats</div>
                 <div class="card-body">
@@ -56,39 +53,31 @@
                     </ul>
                 </div>
             </div>
-        </div>
+        </div> --}}
     </div>
 
     <!-- Recent Activity Table -->
     <div class="row">
         <div class="col-md-12">
             <div class="card">
-                <div class="card-header">Recent Activity</div>
+                <div class="card-header">Pemesanan Kendaraan Operasional</div>
                 <div class="card-body">
                     <table class="table table-bordered">
                         <thead>
                             <tr>
-                                <th>#</th>
-                                <th>Activity</th>
-                                <th>Date</th>
+                                <th>No</th>
+                                <th>Nama Pemesan</th>
+                                <th>Tanggal Pemesanan</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>1</td>
-                                <td>New user registered</td>
-                                <td>2024-12-17</td>
-                            </tr>
-                            <tr>
-                                <td>2</td>
-                                <td>Order #1123 shipped</td>
-                                <td>2024-12-16</td>
-                            </tr>
-                            <tr>
-                                <td>3</td>
-                                <td>User profile updated</td>
-                                <td>2024-12-15</td>
-                            </tr>
+                            @foreach ($pemesanans as $pemesanan)
+                                <tr>
+                                    <td>{{ $loop->iteration }}</td>
+                                    <td>{{ $pemesanan->getDriver->nama_pegawai }}</td>
+                                    <td>{{ $pemesanan->tanggal_pemesanan }}</td>
+                                </tr>
+                            @endforeach
                         </tbody>
                     </table>
                 </div>
@@ -96,4 +85,34 @@
         </div>
     </div>
 </div>
+@endsection
+
+@section('scripts')
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const ctx = document.getElementById('pemesananChart').getContext('2d');
+        const pemesananChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: {!! json_encode($labels) !!}, // Nama bulan atau kategori pemesanan
+                datasets: [{
+                    label: 'Jumlah Pemesanan',
+                    data: {!! json_encode($data) !!}, // Data pemesanan
+                    backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                    borderColor: 'rgba(54, 162, 235, 1)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+    });
+</script>
 @endsection
