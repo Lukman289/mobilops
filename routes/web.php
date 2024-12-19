@@ -89,7 +89,7 @@ Route::group(['middleware' => ['auth', 'checkRole:admin'] ,'prefix'=> 'admin'], 
 });
 
 Route::group(['middleware' => ['auth', 'checkRole:validator'] ,'prefix'=> 'validator'], function () {
-    Route::get('/', [ValidatorController::class,'index']);
-    Route::post('/validator', [ValidatorController::class,'approve'])->name('validator.approve');
+    Route::get('/', [ValidatorController::class,'index'])->name('validator');
+    Route::put('/validator/{id}', [ValidatorController::class,'approve'])->name('validator.approve');
 });
 
