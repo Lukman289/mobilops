@@ -85,3 +85,20 @@ Perusahaan tersebut membutuhkan sebuah web aplikasi untuk dapat memonitoring  ke
 ##
 
 ## Panduan
+
+### Pemesnaan
+- Login
+    - Pastikan mempunyai username dan password
+    - Akses website mobilops
+    - Klik button login
+    - Masukkan username dan password
+    - Lakukan login
+- Buat Pemesanan
+    - Akses menu operasional kendaraan
+    - Klik tombol Tambah Pemesanan Baru
+    - Isi form sesuai dengan yang diperlukan
+    - Kirim data
+    - Menunggu status pengajuan
+
+
+## 
