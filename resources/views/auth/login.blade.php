@@ -4,98 +4,46 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login - Mobil Operations</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <style>
         body {
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
-            background: linear-gradient(to right, #4facfe, #00f2fe);
             color: #333333;
             display: flex;
             align-items: center;
             justify-content: center;
             height: 100vh;
         }
-
-        .form-container {
-            background-color: #ffffff;
-            color: #333333;
-            padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            max-width: 400px;
-            width: 100%;
-            text-align: center;
-        }
-
-        .form-container h2 {
-            margin-bottom: 20px;
-            font-size: 1.8rem;
-            color: #007bff;
-        }
-
-        .form-container label {
-            display: block;
-            margin-bottom: 8px;
-            font-weight: bold;
-            text-align: left;
-        }
-
-        .form-container input {
-            width: 100%;
-            padding: 10px;
-            margin-bottom: 15px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-        }
-
-        .form-container button {
-            width: 100%;
-            padding: 10px;
-            background-color: #007bff;
-            color: #ffffff;
-            border: none;
-            border-radius: 5px;
-            font-size: 1rem;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-        }
-
-        .form-container button:hover {
-            background-color: #0056b3;
-        }
-
-        .form-container .footer-link {
-            margin-top: 15px;
-            font-size: 0.9rem;
-        }
-
-        .form-container .footer-link a {
-            color: #007bff;
-            text-decoration: none;
-        }
-
-        .form-container .footer-link a:hover {
-            text-decoration: underline;
-        }
     </style>
 </head>
 <body>
-    <div class="form-container">
-        <h2>Login</h2>
-        <form action="{{route('login.auth')}}" method="post">
-            @csrf
-            <label for="username">username:</label>
-            <input type="text" id="username" name="username" placeholder="Enter your username" required>
-
-            <label for="password">Password:</label>
-            <input type="password" id="password" name="password" placeholder="Enter your password" required>
-
-            <button type="submit">Login</button>
-        </form>
-        <div class="footer-link">
-            <p>Don't have an account? <a href="#">Sign up</a></p>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        <h2 class="card-title text-center text-primary">Login</h2>
+                        <form action="{{route('login.auth')}}" method="post">
+                            @csrf
+                            <div class="form-group">
+                                <label for="username">Username:</label>
+                                <input type="text" id="username" name="username" class="form-control" placeholder="Enter your username" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="password">Password:</label>
+                                <input type="password" id="password" name="password" class="form-control" placeholder="Enter your password" required>
+                            </div>
+                            <button type="submit" class="btn btn-primary btn-block">Login</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>
