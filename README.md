@@ -182,7 +182,7 @@ Perusahaan tersebut membutuhkan sebuah web aplikasi untuk dapat memonitoring  ke
     - Konfirmasi penghapusan data
 
 #
-### Validasi Pengajuam Peminjaman Kendaraan
+### Validasi Pengajuan Peminjaman Kendaraan
 - Login dengan dengan akun yang memiliki role validator
 - Klik tombol hijau/setuju untuk menyetujui pengajuan peminjaman kendaraan
 - Klik tombol hijau/setuju untuk menolak pengajuan peminjaman kendaraan
